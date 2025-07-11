@@ -1,0 +1,291 @@
+.interactive-code {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 16px 0;
+  background-color: #2d3748;
+}
+
+.interactive-code__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 16px;
+  background-color: #1a202c;
+  border-bottom: 1px solid #4a5568;
+}
+
+.interactive-code__language {
+  font-size: 12px;
+  font-weight: 600;
+  color: #a0aec0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.interactive-code__links-info {
+  font-size: 11px;
+  color: #68d391;
+  background-color: rgba(104, 211, 145, 0.1);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.interactive-code__content {
+  position: relative;
+}
+
+.interactive-code__content pre {
+  margin: 0 !important;
+  padding: 16px !important;
+  background-color: transparent !important;
+}
+
+.interactive-code__line {
+  position: relative;
+  line-height: 1.5;
+}
+
+.interactive-code__component-link {
+  position: relative;
+  background-color: rgba(56, 178, 172, 0.2);
+  border: 1px solid rgba(56, 178, 172, 0.4);
+  border-radius: 3px;
+  padding: 1px 3px;
+  margin: 0 1px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 600;
+  color: #38b2ac !important;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.interactive-code__component-link:hover {
+  background-color: rgba(56, 178, 172, 0.3);
+  border-color: rgba(56, 178, 172, 0.6);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(56, 178, 172, 0.2);
+}
+
+.interactive-code__component-link:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 2px rgba(56, 178, 172, 0.2);
+}
+
+.interactive-code__component-link:focus {
+  outline: 2px solid #38b2ac;
+  outline-offset: 2px;
+}
+
+.interactive-code__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Dark theme anpassungen */
+.interactive-code--dark {
+  background-color: #1a1a1a;
+}
+
+.interactive-code--dark .interactive-code__header {
+  background-color: #0d0d0d;
+  border-bottom-color: #333;
+}
+
+.interactive-code--dark .interactive-code__language {
+  color: #888;
+}
+
+/* Light theme */
+.interactive-code--light {
+  background-color: #ffffff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.interactive-code--light .interactive-code__header {
+  background-color: #f7fafc;
+  border-bottom-color: #e2e8f0;
+}
+
+.interactive-code--light .interactive-code__language {
+  color: #4a5568;
+}
+
+.interactive-code--light .interactive-code__component-link {
+  background-color: rgba(49, 151, 149, 0.1);
+  border-color: rgba(49, 151, 149, 0.3);
+  color: #319795 !important;
+}
+
+.interactive-code--light .interactive-code__component-link:hover {
+  background-color: rgba(49, 151, 149, 0.2);
+  border-color: rgba(49, 151, 149, 0.5);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .interactive-code {
+    margin: 12px 0;
+    border-radius: 6px;
+  }
+  
+  .interactive-code__header {
+    padding: 6px 12px;
+    flex-direction: column;
+    gap: 4px;
+    align-items: flex-start;
+  }
+  
+  .interactive-code__content pre {
+    padding: 12px !important;
+    font-size: 14px;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .interactive-code__component-link {
+    transition: none;
+  }
+  
+  .interactive-code__component-link:hover {
+    transform: none;
+  }
+}
+
+/* Print styles */
+@media print {
+  .interactive-code {
+    box-shadow: none;
+    border: 1px solid #333;
+  }
+  
+  .interactive-code__component-link {
+    background-color: transparent !important;
+    border: 1px solid #333 !important;
+    color: #333 !important;
+  }
+}
+
+/* Tooltip für klickbare Komponenten */
+.interactive-code__clickable-component {
+  position: relative;
+  border-radius: 2px;
+  padding: 0 1px;
+  border-bottom: 1px dashed #4fd1c7;
+  cursor: pointer;
+  /* Verstecke Browser-Standard-Tooltip, da wir unseren eigenen haben */
+  overflow: visible;
+}
+
+.interactive-code__clickable-component:hover {
+  background-color: rgba(56, 178, 172, 0.1) !important;
+  text-decoration-color: #4fd1c7 !important;
+  border-bottom-color: #38b2ac;
+}
+
+.interactive-code__clickable-component:focus {
+  outline: 2px solid #38b2ac;
+  outline-offset: 1px;
+  background-color: rgba(56, 178, 172, 0.15) !important;
+}
+
+.interactive-code__clickable-component:active {
+  background-color: rgba(56, 178, 172, 0.2) !important;
+  transform: translateY(1px);
+}
+
+/* Custom Tooltip */
+.interactive-code__clickable-component::before {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #2d3748;
+  color: #e2e8f0;
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: normal;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+  z-index: 1000;
+  pointer-events: none;
+  border: 1px solid #4a5568;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+.interactive-code__clickable-component::after {
+  content: '';
+  position: absolute;
+  bottom: calc(100% + 1px);
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: #4a5568;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.interactive-code__clickable-component:hover::before,
+.interactive-code__clickable-component:hover::after {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Error Boundary Styles */
+.interactive-code-error {
+  border: 1px solid #ff6b6b;
+  border-radius: 8px;
+  background: #ffe0e0;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+.interactive-code-error__content h3 {
+  margin: 0 0 0.5rem 0;
+  color: #c92a2a;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.interactive-code-error__content p {
+  margin: 0 0 1rem 0;
+  color: #495057;
+  font-size: 0.875rem;
+}
+
+.interactive-code-error__content details {
+  margin-top: 0.5rem;
+}
+
+.interactive-code-error__content summary {
+  cursor: pointer;
+  color: #c92a2a;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.interactive-code-error__content pre {
+  background: #f8f9fa;
+  padding: 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  color: #495057;
+  overflow-x: auto;
+  margin: 0.5rem 0 0 0;
+}
